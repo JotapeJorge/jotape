@@ -348,26 +348,53 @@
         </div>
       </div>
 
-      <div class="vcard">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 3"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="vcard-info">
-          <span class="vcard-title">Título do vídeo</span>
-          <span class="vcard-cat">YouTube</span>
-        </div>
-      </div>
+      <!-- 4 vídeos verticais ocupando as 2 colunas restantes -->
+      <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem 2rem;">
 
-      <div class="vcard">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 4"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="vcard">
+          <div class="video-wrap" style="padding-bottom: 177.78%;">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 3"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="vcard-info">
+            <span class="vcard-title">Título</span>
+            <span class="vcard-cat">Short</span>
+          </div>
         </div>
-        <div class="vcard-info">
-          <span class="vcard-title">Título do vídeo</span>
-          <span class="vcard-cat">YouTube</span>
+
+        <div class="vcard">
+          <div class="video-wrap" style="padding-bottom: 177.78%;">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 4"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="vcard-info">
+            <span class="vcard-title">Título</span>
+            <span class="vcard-cat">Short</span>
+          </div>
         </div>
+
+        <div class="vcard">
+          <div class="video-wrap" style="padding-bottom: 177.78%;">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 5"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="vcard-info">
+            <span class="vcard-title">Título</span>
+            <span class="vcard-cat">Short</span>
+          </div>
+        </div>
+
+        <div class="vcard">
+          <div class="video-wrap" style="padding-bottom: 177.78%;">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 6"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="vcard-info">
+            <span class="vcard-title">Título</span>
+            <span class="vcard-cat">Short</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -397,9 +424,9 @@
       <div>
         <h2 class="contato-hed">Vamos trabalhar<br/><em>juntos?</em></h2>
         <div class="contato-list">
-          <a href="mailto:seuemail@email.com" class="cl">
+          <a href="/cdn-cgi/l/email-protection#5f2c3a2a3a323e36331f3a323e3633713c3032" class="cl">
             <span class="cl-label">E-mail</span>
-            <span class="cl-val">seuemail@email.com</span>
+            <span class="cl-val"><span class="__cf_email__" data-cfemail="a2d1c7d7c7cfc3cbcee2c7cfc3cbce8cc1cdcf">[email&#160;protected]</span></span>
             <span class="cl-arrow">↗</span>
           </a>
           <a href="https://youtube.com/@jornalistaPERDIDO" target="_blank" class="cl">
@@ -449,17 +476,7 @@
     <p class="footer-copy">© 2025</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const btn = this.querySelector('.btn-send');
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.style.display = 'none';
-        document.getElementById('formOk').style.display = 'block';
-      }, 1200);
-    });
-  </script>
-</body>
-</html>
