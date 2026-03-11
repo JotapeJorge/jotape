@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jornalista Perdido</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Jotapê Jorge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&family=Merriweather:wght@300;400;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --navy: #1a2d40;
-      --blue: #1a4d8c;
+      --blue: #003e6a;
       --muted: #aaa;
-      --serif: 'Playfair Display', Georgia, serif;
+      --serif: 'Merriweather', Georgia, serif;
+      --italic: 'Playfair Display', Georgia, serif;
       --cond: 'Barlow Condensed', sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    .hero-hed em, .sobre-hed em, .contato-hed em {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+    }
     body { background: #fff; color: var(--navy); font-family: var(--cond); }
 
     /* ── NAV ── */
@@ -27,16 +31,15 @@
       padding: 2rem 2.5rem;
     }
     .nav-name {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--navy);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: .7rem;
     }
-    .nav-name img { height: 28px; }
+    .nav-name img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -131,6 +134,19 @@
       text-transform: uppercase;
       color: var(--muted);
       padding-top: .2rem;
+    }
+    .sobre-foto {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    .sobre-body {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
     }
     .sobre-body {}
     .sobre-hed {
@@ -285,6 +301,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       nav, #hero, #works, #sobre, footer { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .nav-name img { height: 28px; } /* menor em mobile */
       .nav-links { gap: 1.5rem; }
       .works-grid { grid-template-columns: 1fr; }
       #sobre { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -299,8 +316,8 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-name">
-      <img src="dingbat_azul_redondo.png" alt="" />
-      Jornalista Perdido.
+      <!-- Troque "logo.png" pelo nome do seu arquivo de imagem -->
+      <img src="logo.png" alt="Jornalista Perdido" />
     </a>
     <ul class="nav-links">
       <li><a href="#works">Portfólio</a></li>
@@ -404,7 +421,9 @@
   <section id="sobre">
     <p class="sobre-label">Sobre</p>
     <div class="sobre-body">
-      <h2 class="sobre-hed">Jornalista.<br/><em>Editor de vídeo.</em></h2>
+      <img src="foto.jpg" alt="Foto de perfil" class="sobre-foto" />
+      <div>
+        <h2 class="sobre-hed">Jornalista.<br/><em>Editor de vídeo.</em></h2>
       <p class="sobre-p">
         Sou jornalista com [X] anos de experiência e editor de vídeo. Combino narrativa editorial com técnica audiovisual — cada corte tem intenção, cada vídeo tem uma história para contar. Disponível para projetos freelance.
       </p>
@@ -414,11 +433,9 @@
         <span class="tag">After Effects</span>
         <span class="tag">Color Grading</span>
         <span class="tag">Roteiro</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
+      </div><!-- fim texto -->
+    </div><!-- fim sobre-body -->
+  </section><!-- fim sobre -->
   <section id="contato">
     <div class="contato-grid">
       <div>
@@ -479,4 +496,4 @@
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const btn = this.querySelector('.btn-send');
+      const btn = this.querySelector('.btn-send')
