@@ -340,7 +340,7 @@
   <!-- HERO -->
   <section id="hero">
     <div class="video-wrap" style="padding-bottom:56.25%;" data-id="k7Kv1ByiSuU">
-      <div class="yt-facade" style="background-image:url('thumbnail.jpg')">
+      <div class="yt-facade" style="background-image:url('thumbnail.png')">
         <div class="yt-play"></div>
       </div>
     </div>
@@ -353,7 +353,7 @@
 
       <div class="vcard">
         <div class="video-wrap" data-id="5L2Vk_kP_zo">
-          <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/5L2Vk_kP_zo/maxresdefault.jpg')">
+          <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/5L2Vk_kP_zo/hqdefault.jpg')">
             <div class="yt-play"></div>
           </div>
         </div>
@@ -365,7 +365,7 @@
 
       <div class="vcard">
         <div class="video-wrap" data-id="TyuT89hlfhY">
-          <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/TyuT89hlfhY/maxresdefault.jpg')">
+          <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/TyuT89hlfhY/hqdefault.jpg')">
             <div class="yt-play"></div>
           </div>
         </div>
@@ -380,7 +380,7 @@
 
         <div class="vcard">
           <div class="video-wrap vertical" data-id="QKpAV-XppEI">
-            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/QKpAV-XppEI/maxresdefault.jpg')">
+            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/QKpAV-XppEI/hqdefault.jpg')">
               <div class="yt-play"></div>
             </div>
           </div>
@@ -392,7 +392,7 @@
 
         <div class="vcard">
           <div class="video-wrap vertical" data-id="0zjmjJIz-ZY">
-            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/0zjmjJIz-ZY/maxresdefault.jpg')">
+            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/0zjmjJIz-ZY/hqdefault.jpg')">
               <div class="yt-play"></div>
             </div>
           </div>
@@ -404,7 +404,7 @@
 
         <div class="vcard">
           <div class="video-wrap vertical" data-id="9ceZp5QrrTE">
-            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/9ceZp5QrrTE/maxresdefault.jpg')">
+            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/9ceZp5QrrTE/hqdefault.jpg')">
               <div class="yt-play"></div>
             </div>
           </div>
@@ -416,7 +416,7 @@
 
         <div class="vcard">
           <div class="video-wrap vertical" data-id="Bn76p5Z7Ia4">
-            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/Bn76p5Z7Ia4/maxresdefault.jpg')">
+            <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/Bn76p5Z7Ia4/hqdefault.jpg')">
               <div class="yt-play"></div>
             </div>
           </div>
@@ -458,7 +458,7 @@
         <h2 class="contato-hed">Vamos trabalhar<br/><em>juntos?</em></h2>
       </div>
       <div class="contato-list">
-            <a href="mailto:jp.jorge89@gmail.com" class="cl">
+           <a href="mailto:jp.jorge89@gmail.com" class="cl">
           <span class="cl-label">E-mail</span>
           <span class="cl-val">jp.jorge89@gmail.com</span></span>
           <span class="cl-arrow">↗</span>
@@ -503,8 +503,10 @@
 
     // ── TRADUÇÃO ──
     // Para trocar o vídeo em inglês, mude o ID abaixo:
-    const heroIdPT = 'k7Kv1ByiSuU';
-    const heroIdEN = 'k7Kv1ByiSuU'; // ← troque pelo ID do vídeo em inglês quando tiver
+    const heroIdPT = 'R_FvvL7IE-Y';
+    const heroIdEN = 'aSyj1bPddP4'; // ← troque pelo ID do vídeo em inglês quando tiver
+    const heroThumbPT = 'thumbnail.jpg';
+    const heroThumbEN = 'thumbnailEN.jpg'; // ← troque por 'thumbnail-en.png' quando tiver
 
     const translations = {
       pt: {
@@ -556,6 +558,8 @@
       document.querySelectorAll('.nav-links a').forEach((a, i) => a.textContent = t.nav[i]);
       const heroWrap = document.querySelector('#hero .video-wrap');
       heroWrap.dataset.id = lang === 'en' ? heroIdEN : heroIdPT;
+      const facade = heroWrap.querySelector('.yt-facade');
+      if (facade) facade.style.backgroundImage = `url('${lang === 'en' ? heroThumbEN : heroThumbPT}')`;
       document.querySelector('.hero-caption').textContent = t.caption;
       document.querySelectorAll('.vcard-title').forEach((el, i) => el.textContent = t.titles[i]);
       document.querySelectorAll('.vcard-cat').forEach((el, i) => { if (t.cats[i]) el.textContent = t.cats[i]; });
