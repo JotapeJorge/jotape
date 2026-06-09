@@ -18,22 +18,26 @@
       --cond: 'Barlow Condensed', sans-serif;
     }
 
+    html, body { overflow-x: hidden; }
     body { background: #fff; color: var(--navy); font-family: var(--cond); }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 2rem 2.5rem;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     }
-    .nav-name img { height: 80px; }
+    .nav-name {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-name img {
+      height: 80px;
+      width: auto;
+      display: block;
+    }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -46,11 +50,13 @@
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
+      transition: color .2s;
     }
     .nav-links a:hover { color: var(--navy); }
 
-    /* GRID */
-    #works { padding: 140px 2.5rem 4rem; }
+    /* ── PORTFOLIO GRID ── */
+    #works { padding: 0 2.5rem 3rem; }
+
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -58,25 +64,24 @@
       gap: 1rem;
     }
 
-    /* Cards originais */
-    .pg-v1 { grid-column: 1/4; grid-row: 1/3; }
-    .pg-v2 { grid-column: 4/5; grid-row: 1/3; }
-    .pg-v3 { grid-column: 5/6; grid-row: 1/2; }
-    .pg-v4 { grid-column: 5/6; grid-row: 2/3; }
-    .pg-v5 { grid-column: 1/2; grid-row: 3/5; }
-    .pg-v6 { grid-column: 2/3; grid-row: 3/5; }
-    .pg-v7 { grid-column: 3/6; grid-row: 3/5; }
-    .pg-v8 { grid-column: 1/4; grid-row: 5/7; }
-    .pg-v9 { grid-column: 4/5; grid-row: 5/7; }
-    .pg-v10{ grid-column: 5/6; grid-row: 5/7; }
+    /* ── LINHA 1 e 2 (original) ── */
+    .pg-v1 { grid-column: 1 / 4; grid-row: 1 / 3; }
+    .pg-v2 { grid-column: 4 / 5; grid-row: 1 / 3; }
+    .pg-v3 { grid-column: 5 / 6; grid-row: 1 / 2; }
+    .pg-v4 { grid-column: 5 / 6; grid-row: 2 / 3; }
 
-    /* Nova linha - grande à esquerda como as outras principais */
-    .pg-v11 { grid-column: 1/4; grid-row: 8/10; }   /* grande */
-    .pg-v12 { grid-column: 4/5; grid-row: 8/9; }    /* pequeno cima */
-    .pg-v13 { grid-column: 5/6; grid-row: 8/9; }    /* pequeno cima */
-    .pg-v14 { grid-column: 4/6; grid-row: 9/10; }   /* opcional - pode remover se quiser só 3 */
+    /* ── LINHA 3 e 4 ── */
+    .pg-v5 { grid-column: 1 / 2; grid-row: 3 / 5; } /* vertical 1col×2lin */
+    .pg-v6 { grid-column: 2 / 3; grid-row: 3 / 5; } /* vertical 1col×2lin */
+    .pg-v7 { grid-column: 3 / 6; grid-row: 3 / 5; } /* grande 3col×2lin */
 
-    /* Vídeos */
+    /* ── LINHA 5 e 6 (espelho da linha 1–2) ── */
+    .pg-v8  { grid-column: 1 / 4; grid-row: 5 / 7; } /* grande 3col×2lin */
+    .pg-v9  { grid-column: 4 / 5; grid-row: 5 / 7; } /* vertical 1col×2lin */
+    .pg-v10 { grid-column: 5 / 6; grid-row: 5 / 6; } /* pequeno superior */
+    .pg-v11 { grid-column: 5 / 6; grid-row: 6 / 7; } /* pequeno inferior */
+
+    /* ── VIDEO CARDS ── */
     .vcard {
       position: relative;
       overflow: hidden;
@@ -91,6 +96,13 @@
       transition: transform .4s ease;
     }
     .vcard:hover .yt-facade { transform: scale(1.04); }
+    .vcard iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
 
     .yt-play {
       position: absolute;
@@ -100,6 +112,8 @@
       background: rgba(0,0,0,.65);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+      pointer-events: none;
     }
     .vcard:hover .yt-play { background: rgba(0,0,0,.85); }
     .yt-play::after {
@@ -107,34 +121,48 @@
       border-style: solid;
       border-width: 9px 0 9px 16px;
       border-color: transparent transparent transparent #fff;
+      margin-left: 3px;
+    }
+    .pg-v1 .yt-play,
+    .pg-v7 .yt-play,
+    .pg-v8 .yt-play {
+      width: 60px; height: 60px;
+    }
+    .pg-v1 .yt-play::after,
+    .pg-v7 .yt-play::after,
+    .pg-v8 .yt-play::after {
+      border-width: 12px 0 12px 20px;
     }
 
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.65), transparent 55%);
+      background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 55%);
       display: flex;
-      align-items: flex-end;
-      padding: 1.2rem;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
       pointer-events: none;
     }
     .vcard-title {
       font-family: var(--serif);
-      font-size: .85rem;
+      font-size: .8rem;
+      font-weight: 300;
       color: #fff;
-      line-height: 1.35;
+      line-height: 1.4;
     }
-    .pg-v1 .vcard-title, .pg-v7 .vcard-title, .pg-v8 .vcard-title, .pg-v11 .vcard-title {
-      font-size: 1.1rem;
+    .pg-v1 .vcard-title,
+    .pg-v7 .vcard-title,
+    .pg-v8 .vcard-title {
+      font-size: 1rem;
     }
 
-    /* SOBRE - Foto esquerda + Texto direita */
+    /* ── SOBRE ── */
     #sobre {
-      padding: 6rem 2.5rem;
+      padding: 5rem 2.5rem;
       display: grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns: 1fr 2fr;
       gap: 4rem;
-      align-items: start;
       border-top: 1px solid #eee;
     }
     .sobre-label {
@@ -143,76 +171,222 @@
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--muted);
+      padding-top: .2rem;
     }
     .sobre-foto {
-      width: 180px;
-      height: 180px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
+      display: block;
+      flex-shrink: 0;
     }
-    .sobre-text h2 {
+    .sobre-body {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .sobre-hed {
       font-family: var(--serif);
-      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-      line-height: 1.2;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.3;
       margin-bottom: 1.5rem;
+      color: #111;
     }
-    .sobre-text em { font-family: var(--italic); }
+    .sobre-hed .dot { color: var(--blue); }
+    .sobre-hed em {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+    }
     .sobre-p {
-      font-size: 1.02rem;
-      line-height: 1.85;
-      color: #555;
-      max-width: 540px;
+      font-size: .9rem;
+      color: #777;
+      line-height: 1.9;
+      max-width: 520px;
+      margin-bottom: 1.8rem;
     }
     .sobre-tags {
-      margin-top: 2rem;
       display: flex;
       flex-wrap: wrap;
-      gap: .6rem;
+      gap: .4rem;
     }
     .tag {
-      font-size: .7rem;
-      padding: .4rem .9rem;
-      border: 1px solid #ddd;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
       color: var(--muted);
+      border: 1px solid #e0e0e0;
+      padding: .25rem .7rem;
     }
 
-    /* Contato */
+    /* ── CONTATO ── */
     #contato {
       background: var(--navy);
       padding: 6rem 2.5rem;
-      color: white;
     }
     .contato-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
+      align-items: start;
     }
     .contato-hed {
       font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1.15;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 3rem;
     }
+    .contato-hed em {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      color: #fff;
+    }
+    .contato-list { display: flex; flex-direction: column; }
     .cl {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
       text-decoration: none;
-      color: inherit;
+      transition: border-color .2s;
     }
+    .cl:hover { border-bottom-color: rgba(255,255,255,.3); }
+    .cl-label {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+    }
+    .cl-val {
+      font-size: .9rem;
+      color: rgba(255,255,255,.7);
+    }
+    .cl-arrow { color: rgba(255,255,255,.25); }
 
+    /* ── FOOTER ── */
     footer {
       background: #111e2b;
-      padding: 2rem 2.5rem;
+      padding: 1.8rem 2.5rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      color: rgba(255,255,255,0.6);
+      justify-content: space-between;
+    }
+    .footer-name {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      text-decoration: none;
+    }
+    .footer-name .fn-serif {
+      font-family: var(--serif);
+      font-size: .95rem;
+      font-weight: 400;
+      color: rgba(255,255,255,.3);
+    }
+    .footer-name .fn-sans {
+      font-family: var(--cond);
+      font-size: .95rem;
+      font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+    }
+    .footer-copy {
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: rgba(255,255,255,.18);
+    }
+
+    .lang-btn {
+      font-family: var(--cond);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: 1px solid #ddd;
+      padding: .3rem .7rem;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .lang-btn:hover { color: var(--navy); border-color: var(--navy); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: calc((100vw - 5rem) * 0.28);
+      }
+      /* Linha 1–2 */
+      .pg-v1 { grid-column: 1 / 3; grid-row: 1 / 3; }
+      .pg-v2 { grid-column: 3 / 4; grid-row: 1 / 3; }
+      /* Linha 3 */
+      .pg-v3 { grid-column: 1 / 2; grid-row: 3 / 4; }
+      .pg-v4 { grid-column: 2 / 3; grid-row: 3 / 4; }
+      .pg-v5 { grid-column: 3 / 4; grid-row: 3 / 5; }
+      /* Linha 4 */
+      .pg-v6 { grid-column: 1 / 2; grid-row: 4 / 6; }
+      .pg-v7 { grid-column: 2 / 4; grid-row: 4 / 6; }
+      /* Linha 5–6 (novos) */
+      .pg-v8  { grid-column: 1 / 3; grid-row: 6 / 8; }
+      .pg-v9  { grid-column: 3 / 4; grid-row: 6 / 8; }
+      .pg-v10 { grid-column: 1 / 2; grid-row: 8 / 9; }
+      .pg-v11 { grid-column: 2 / 3; grid-row: 8 / 9; }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 1.2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .nav-name img { height: 48px; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: .68rem; }
+      #works { padding: 0 1.2rem 2rem; }
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: calc((100vw - 2.4rem - 1rem) * 0.56 / 2);
+        gap: .6rem;
+      }
+      /* Linha 1 */
+      .pg-v1  { grid-column: 1 / 3; grid-row: 1 / 2; }
+      /* Linha 2–3 */
+      .pg-v2  { grid-column: 1 / 2; grid-row: 2 / 4; }
+      .pg-v3  { grid-column: 2 / 3; grid-row: 2 / 3; }
+      .pg-v4  { grid-column: 2 / 3; grid-row: 3 / 4; }
+      /* Linha 4–5 */
+      .pg-v5  { grid-column: 1 / 2; grid-row: 4 / 6; }
+      .pg-v6  { grid-column: 2 / 3; grid-row: 4 / 6; }
+      /* Linha 6 */
+      .pg-v7  { grid-column: 1 / 3; grid-row: 6 / 7; }
+      /* Linha 7–8 (novos) */
+      .pg-v8  { grid-column: 1 / 3; grid-row: 7 / 8; }
+      .pg-v9  { grid-column: 1 / 2; grid-row: 8 / 10; }
+      .pg-v10 { grid-column: 2 / 3; grid-row: 8 / 9; }
+      .pg-v11 { grid-column: 2 / 3; grid-row: 9 / 10; }
+      /* Seções */
+      #sobre { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 1.2rem; }
+      .sobre-body { flex-direction: column; }
+      .sobre-foto { width: 90px; height: 90px; }
+      #contato { padding: 4rem 1.2rem; }
+      .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { padding: 1.5rem 1.2rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
     <a href="#" class="nav-name">
       <img src="cabeçalho_site.png" alt="Jotapê Jorge" />
@@ -225,50 +399,129 @@
     </ul>
   </nav>
 
+  <!-- PORTFOLIO -->
   <section id="works">
     <div class="portfolio-grid">
-      <!-- Vídeos originais (mantidos) -->
-      <div class="vcard pg-v1" data-id="R_FvvL7IE-Y"> ... </div>
-      <!-- (coloque aqui todos os 10 cards originais que você tinha) -->
 
-      <!-- Nova linha - grande à esquerda -->
-      <div class="vcard pg-v11" data-id="QZs1EZ-wL_A">
-        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/QZs1EZ-wL_A/hqdefault.jpg')"></div>
+      <!-- V1: Apresentação — destaque principal -->
+      <div class="vcard pg-v1" data-id="R_FvvL7IE-Y">
+        <div class="yt-facade" style="background-image:url('thumbnail.jpg')"></div>
         <div class="yt-play"></div>
-        <div class="card-overlay"><span class="vcard-title">EditFest 2026 | Untime</span></div>
+        <div class="card-overlay">
+          <span class="vcard-title">Apresentação</span>
+        </div>
       </div>
 
-      <div class="vcard pg-v12" data-id="yWjlX9FIgDU">
-        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/yWjlX9FIgDU/hqdefault.jpg')"></div>
+      <!-- V2: vertical — Origem dos animes -->
+      <div class="vcard pg-v2" data-id="Bn76p5Z7Ia4">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/Bn76p5Z7Ia4/maxresdefault.jpg')"></div>
         <div class="yt-play"></div>
-        <div class="card-overlay"><span class="vcard-title">Vídeo ensaio</span></div>
+        <div class="card-overlay">
+          <span class="vcard-title">A origem bizarra dos animes</span>
+        </div>
       </div>
 
-      <div class="vcard pg-v13" data-id="sODz0dW5nVc">
-        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/sODz0dW5nVc/hqdefault.jpg')"></div>
+      <!-- V3: pequeno — Free Willy -->
+      <div class="vcard pg-v3" data-id="TyuT89hlfhY">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/TyuT89hlfhY/maxresdefault.jpg')"></div>
         <div class="yt-play"></div>
-        <div class="card-overlay"><span class="vcard-title">Vídeo ensaio</span></div>
+        <div class="card-overlay">
+          <span class="vcard-title">A verdadeira história de 'Free Willy'</span>
+        </div>
       </div>
+
+      <!-- V4: pequeno — Kafka -->
+      <div class="vcard pg-v4" data-id="Vls3VO-AHks">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/Vls3VO-AHks/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">Kafka</span>
+        </div>
+      </div>
+
+      <!-- V5: vertical — Arranha-céu SP -->
+      <div class="vcard pg-v5" data-id="0zjmjJIz-ZY">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/0zjmjJIz-ZY/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">O arranha-céu que SP "quase" teve</span>
+        </div>
+      </div>
+
+      <!-- V6: vertical — Yukio Mishima -->
+      <div class="vcard pg-v6" data-id="QKpAV-XppEI">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/QKpAV-XppEI/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">Yukio Mishima</span>
+        </div>
+      </div>
+
+      <!-- V7: grande destaque — Henry Darger -->
+      <div class="vcard pg-v7" data-id="5L2Vk_kP_zo">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/5L2Vk_kP_zo/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">O estranho mundo de Henry Darger</span>
+        </div>
+      </div>
+
+      <!-- V8: grande 3col×2lin — novo yWjlX9FIgDU -->
+      <div class="vcard pg-v8" data-id="yWjlX9FIgDU">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/yWjlX9FIgDU/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">O Fascismo em Tropas Estelares</span>
+        </div>
+      </div>
+
+      <!-- V9: vertical 1col×2lin — 21 Filmes -->
+      <div class="vcard pg-v9" data-id="9ceZp5QrrTE">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/9ceZp5QrrTE/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">21 Filmes que explicam o Século 21</span>
+        </div>
+      </div>
+
+      <!-- V10: pequeno — novo 4ErbY_gxPrU -->
+      <div class="vcard pg-v10" data-id="4ErbY_gxPrU">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/4ErbY_gxPrU/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">Publicidade "O Boticário"</span>
+        </div>
+      </div>
+
+      <!-- V11: pequeno — novo z_W-KY09Ps8 -->
+      <div class="vcard pg-v11" data-id="z_W-KY09Ps8">
+        <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/z_W-KY09Ps8/maxresdefault.jpg')"></div>
+        <div class="yt-play"></div>
+        <div class="card-overlay">
+          <span class="vcard-title">Publicidade "Nutella"</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- SOBRE -->
   <section id="sobre">
     <p class="sobre-label">Sobre</p>
-    <img src="jornalista_azul.png" alt="Jotapê Jorge" class="sobre-foto" />
-    <div class="sobre-text">
-      <h2>Jornalista<span class="dot">.</span><br><em>Editor de vídeo<span class="dot">.</span></em></h2>
-      <p class="sobre-p">
-        <b>Jotapê Jorge</b> é jornalista com quase 20 anos de experiência e editor de vídeo. 
-        Narrativa editorial com técnica audiovisual. Cada corte tem intenção e cada vídeo tem 
-        uma história para contar (porque tudo tem uma história). Disponível para projetos freelance.
-      </p>
-      <div class="sobre-tags">
-        <span class="tag">Premiere Pro</span>
-        <span class="tag">DaVinci Resolve</span>
-        <span class="tag">After Effects</span>
-        <span class="tag">Color Grading</span>
-        <span class="tag">Roteiro</span>
+    <div class="sobre-body">
+      <img src="jornalista_azul.png" alt="Foto de perfil" class="sobre-foto" />
+      <div>
+        <h2 class="sobre-hed">Jotapê Jorge<span class="dot">.</span><br/><em>Editor de vídeo<span class="dot">.</span></em></h2>
+        <p class="sobre-p">
+          <b> Editor de vídeo com experiência em jornalismo, motion design e produção de conteúdo para mídias digitais. Atuo com vídeo-ensaios, publicidade, animação e fluxos de edição utilizando Adobe Premiere.
+        </p>
+        <div class="sobre-tags">
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">DaVinci Resolve</span>
+          <span class="tag">After Effects</span>
+          <span class="tag">Color Grading</span>
+          <span class="tag">Roteiro</span>
+        </div>
       </div>
     </div>
   </section>
@@ -277,25 +530,29 @@
   <section id="contato">
     <div class="contato-grid">
       <div>
-        <h2 class="contato-hed">Vamos trabalhar<br><em>juntos?</em></h2>
+        <h2 class="contato-hed">Vamos trabalhar<br/><em>juntos?</em></h2>
       </div>
-      <div>
+      <div class="contato-list">
         <a href="mailto:jp.jorge89@gmail.com" class="cl">
-          <span class="cl-label">E-MAIL</span>
+          <span class="cl-label">E-mail</span>
           <span class="cl-val">jp.jorge89@gmail.com</span>
+          <span class="cl-arrow">↗</span>
         </a>
         <a href="https://youtube.com/@jornalistaPERDIDO" target="_blank" class="cl">
-          <span class="cl-label">YOUTUBE</span>
+          <span class="cl-label">YouTube</span>
           <span class="cl-val">@jornalistaPERDIDO</span>
+          <span class="cl-arrow">↗</span>
         </a>
         <a href="https://www.instagram.com/jornalistaperdido/" target="_blank" class="cl">
-          <span class="cl-label">INSTAGRAM</span>
+          <span class="cl-label">Instagram</span>
           <span class="cl-val">@jornalistaperdido</span>
+          <span class="cl-arrow">↗</span>
         </a>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <a href="#" class="footer-name">
       <span class="fn-serif">Jotapê</span>
@@ -305,17 +562,98 @@
   </footer>
 
   <script>
+    const heroIdPT    = 'R_FvvL7IE-Y';
+    const heroIdEN    = 'aSyj1bPddP4';
+    const heroThumbPT = 'thumbnail.jpg';
+    const heroThumbEN = 'thumbnailEN.jpg';
+
+    // click → embed
     document.querySelectorAll('.vcard[data-id]').forEach(card => {
-      card.addEventListener('click', function() {
-        if (this.querySelector('iframe')) return;
+      card.addEventListener('click', function () {
         const id = this.dataset.id;
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
         iframe.allowFullscreen = true;
         this.innerHTML = '';
         this.appendChild(iframe);
       });
     });
+
+    // ── TRADUÇÃO ──
+    const translations = {
+      pt: {
+        nav: ['Portfólio', 'Sobre', 'Contato'],
+        titles: [
+          'Apresentação',
+          'A origem bizarra dos animes',
+          "A verdadeira história de 'Free Willy'",
+          'Kafka: estrela do TikTok',
+          'O arranha-céu que SP "quase" teve',
+          'Yukio Mishima',
+          'O estranho mundo de Henry Darger',
+          'O Fascismo em Tropas Estelares',
+          '21 Filmes que explicam o Século 21',
+          'Publicidade "O Boticário"',
+          'Publicidade "Nutella"'
+        ],
+        sobreLabel: 'Sobre',
+        sobreHed: "Jotapê Jorge<span class='dot'>.</span><br/><em>Editor de vídeo<span class='dot'>.</span></em>",
+        sobreP: 'Editor de vídeo com experiência em jornalismo, motion design e produção de conteúdo para mídias digitais. Atuo com vídeo-ensaios, animação, publicidade e fluxos de edição utilizando o Adobe Premiere.',
+        contatoHed: 'Vamos trabalhar<br/><em>juntos?</em>',
+        clLabels: ['E-mail', 'YouTube', 'Instagram'],
+        langBtn: 'EN'
+      },
+      en: {
+        nav: ['Portfolio', 'About', 'Contact'],
+        titles: [
+          'Introduction',
+          'The bizarre origin of anime',
+          "The true story of 'Free Willy'",
+          'Kafka: a star on TikTok',
+          'The skyscraper São Paulo "almost" had',
+          'Yukio Mishima',
+          'The strange world of Henry Darger',
+          'The fascism of Starship Troopers',
+          '21 Films that explain the 21st Century',
+          '"O Boticário" ad',
+          '"Nutella" ad'
+        ],
+        sobreLabel: 'About',
+        sobreHed: "Jotapê Jorge<span class='dot'>.</span><br/><em>Video editor<span class='dot'>.</span></em>",
+        sobreP: 'Video editor from Brazil with a background in journalism, motion design, and content production for digital media. Experienced in video essays, animation, and editing workflows using Adobe Creative Suite.',
+        contatoHed: "Let's work<br/><em>together?</em>",
+        clLabels: ['E-mail', 'YouTube', 'Instagram'],
+        langBtn: 'PT'
+      }
+    };
+
+    let lang = 'pt';
+
+    function toggleLang() {
+      lang = lang === 'pt' ? 'en' : 'pt';
+      const t = translations[lang];
+
+      document.querySelector('.lang-btn').textContent = t.langBtn;
+      document.querySelectorAll('.nav-links a').forEach((a, i) => a.textContent = t.nav[i]);
+
+      const v1 = document.querySelector('.pg-v1');
+      if (v1) {
+        v1.dataset.id = lang === 'en' ? heroIdEN : heroIdPT;
+        const facade = v1.querySelector('.yt-facade');
+        if (facade) facade.style.backgroundImage = `url('${lang === 'en' ? heroThumbEN : heroThumbPT}')`;
+      }
+
+      document.querySelectorAll('.vcard-title').forEach((el, i) => {
+        if (t.titles[i]) el.textContent = t.titles[i];
+      });
+
+      document.querySelector('.sobre-label').textContent = t.sobreLabel;
+      document.querySelector('.sobre-hed').innerHTML = t.sobreHed;
+      document.querySelector('.sobre-p').innerHTML = t.sobreP;
+      document.querySelector('.contato-hed').innerHTML = t.contatoHed;
+      document.querySelectorAll('.cl-label').forEach((el, i) => el.textContent = t.clLabels[i]);
+    }
   </script>
 </body>
 </html>
