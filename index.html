@@ -18,23 +18,45 @@
       --cond: 'Barlow Condensed', sans-serif;
     }
 
+    html, body { overflow-x: hidden; }
     body { background: #fff; color: var(--navy); font-family: var(--cond); }
+
+    /* NAV - Restaurado original */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 2rem 2.5rem;
-      background: rgba(255,255,255,0.96);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
     }
-    .nav-name img { height: 80px; }
+    .nav-name { text-decoration: none; display: flex; align-items: center; }
+    .nav-name img { height: 80px; width: auto; display: block; }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--navy); }
 
-    /* GRID */
+    /* PORTFOLIO GRID */
     #works { padding: 140px 2.5rem 4rem; }
+
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -43,23 +65,23 @@
     }
 
     /* Cards originais */
-    .pg-v1 { grid-column: 1/4; grid-row: 1/3; }
-    .pg-v2 { grid-column: 4/5; grid-row: 1/3; }
-    .pg-v3 { grid-column: 5/6; grid-row: 1/2; }
-    .pg-v4 { grid-column: 5/6; grid-row: 2/3; }
-    .pg-v5 { grid-column: 1/2; grid-row: 3/5; }
-    .pg-v6 { grid-column: 2/3; grid-row: 3/5; }
-    .pg-v7 { grid-column: 3/6; grid-row: 3/5; }
-    .pg-v8 { grid-column: 1/4; grid-row: 5/7; }
-    .pg-v9 { grid-column: 4/5; grid-row: 5/7; }
-    .pg-v10{ grid-column: 5/6; grid-row: 5/7; }
+    .pg-v1 { grid-column: 1 / 4; grid-row: 1 / 3; }
+    .pg-v2 { grid-column: 4 / 5; grid-row: 1 / 3; }
+    .pg-v3 { grid-column: 5 / 6; grid-row: 1 / 2; }
+    .pg-v4 { grid-column: 5 / 6; grid-row: 2 / 3; }
+    .pg-v5 { grid-column: 1 / 2; grid-row: 3 / 5; }
+    .pg-v6 { grid-column: 2 / 3; grid-row: 3 / 5; }
+    .pg-v7 { grid-column: 3 / 6; grid-row: 3 / 5; }
+    .pg-v8 { grid-column: 1 / 4; grid-row: 5 / 7; }
+    .pg-v9 { grid-column: 4 / 5; grid-row: 5 / 7; }
+    .pg-v10{ grid-column: 5 / 6; grid-row: 5 / 7; }
 
-    /* Nova linha - seguindo o padrão */
-    .pg-v11 { grid-column: 1/3; grid-row: 8/9; }
-    .pg-v12 { grid-column: 3/4; grid-row: 8/9; }
-    .pg-v13 { grid-column: 4/6; grid-row: 8/9; }
+    /* Nova linha */
+    .pg-v11 { grid-column: 1 / 3; grid-row: 8 / 9; }
+    .pg-v12 { grid-column: 3 / 4; grid-row: 8 / 9; }
+    .pg-v13 { grid-column: 4 / 6; grid-row: 8 / 9; }
 
-    /* Vídeos */
+    /* Vídeo Cards */
     .vcard {
       position: relative;
       overflow: hidden;
@@ -71,7 +93,7 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      transition: transform .4s;
+      transition: transform .4s ease;
     }
     .vcard:hover .yt-facade { transform: scale(1.04); }
 
@@ -83,6 +105,8 @@
       background: rgba(0,0,0,.65);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+      pointer-events: none;
     }
     .vcard:hover .yt-play { background: rgba(0,0,0,.85); }
     .yt-play::after {
@@ -90,94 +114,101 @@
       border-style: solid;
       border-width: 9px 0 9px 16px;
       border-color: transparent transparent transparent #fff;
+      margin-left: 3px;
     }
 
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.65), transparent 50%);
+      background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 55%);
       display: flex;
-      align-items: flex-end;
-      padding: 1.2rem;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      pointer-events: none;
     }
     .vcard-title {
       font-family: var(--serif);
-      font-size: .9rem;
+      font-size: .8rem;
+      font-weight: 300;
       color: #fff;
-      line-height: 1.3;
+      line-height: 1.4;
     }
     .pg-v1 .vcard-title, .pg-v7 .vcard-title, .pg-v8 .vcard-title, .pg-v11 .vcard-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
-    /* SOBRE - Foto esquerda | Texto direita */
+    /* SOBRE - Foto esquerda + Texto direita (melhorado) */
     #sobre {
       padding: 6rem 2.5rem;
       display: grid;
-      grid-template-columns: 160px 1fr;
+      grid-template-columns: 170px 1fr;
       gap: 4rem;
-      align-items: start;
+      align-items: flex-start;
       border-top: 1px solid #eee;
     }
     .sobre-label {
-      font-size: .75rem;
+      font-size: .7rem;
       font-weight: 600;
-      letter-spacing: .15em;
+      letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--muted);
+      padding-top: 0.3rem;
     }
     .sobre-foto {
-      width: 160px;
-      height: 160px;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
       object-fit: cover;
+      flex-shrink: 0;
     }
     .sobre-text h2 {
       font-family: var(--serif);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.25;
+      margin-bottom: 1.6rem;
     }
     .sobre-text em { font-family: var(--italic); font-style: italic; }
     .sobre-p {
-      font-size: 1.05rem;
+      font-size: 1rem;
       line-height: 1.85;
       color: #555;
-      max-width: 560px;
+      max-width: 520px;
     }
     .sobre-tags {
-      margin-top: 2rem;
       display: flex;
       flex-wrap: wrap;
       gap: .5rem;
+      margin-top: 2rem;
     }
     .tag {
-      font-size: .75rem;
-      padding: .4rem .9rem;
-      border: 1px solid #ddd;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
       color: var(--muted);
+      border: 1px solid #ddd;
+      padding: .35rem .8rem;
     }
 
     /* Responsivo */
     @media (max-width: 900px) {
       .portfolio-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: calc((100vw - 5rem) * 0.28); }
-      .pg-v11 { grid-column: 1/2; grid-row: 9/10; }
-      .pg-v12 { grid-column: 2/3; grid-row: 9/10; }
-      .pg-v13 { grid-column: 3/4; grid-row: 9/10; }
-      #sobre { grid-template-columns: 140px 1fr; gap: 3rem; }
+      #sobre { grid-template-columns: 150px 1fr; gap: 3rem; }
     }
 
     @media (max-width: 600px) {
-      #works { padding: 110px 1rem 2rem; }
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
-      .pg-v11, .pg-v12 { grid-column: 1/2; }
-      .pg-v13 { grid-column: 1/3; }
-      #sobre { grid-template-columns: 1fr; }
+      nav { padding: 1.2rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .nav-name img { height: 48px; }
+      #works { padding: 110px 1.2rem 2rem; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; grid-auto-rows: auto; }
+      #sobre { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
     <a href="#" class="nav-name">
       <img src="cabeçalho_site.png" alt="Jotapê Jorge" />
@@ -190,10 +221,11 @@
     </ul>
   </nav>
 
+  <!-- PORTFOLIO -->
   <section id="works">
     <div class="portfolio-grid">
 
-      <!-- === VÍDEOS ORIGINAIS === -->
+      <!-- Vídeos originais -->
       <div class="vcard pg-v1" data-id="R_FvvL7IE-Y">
         <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/R_FvvL7IE-Y/hqdefault.jpg')"></div>
         <div class="yt-play"></div>
@@ -209,7 +241,7 @@
       <div class="vcard pg-v3" data-id="0zjmjJIz-ZY">
         <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/0zjmjJIz-ZY/hqdefault.jpg')"></div>
         <div class="yt-play"></div>
-        <div class="card-overlay"><span class="vcard-title">O arranha-céu que SP quase teve</span></div>
+        <div class="card-overlay"><span class="vcard-title">O arranha-céu que SP "quase" teve</span></div>
       </div>
 
       <div class="vcard pg-v4" data-id="9ceZp5QrrTE">
@@ -254,7 +286,7 @@
         <div class="card-overlay"><span class="vcard-title">Conteúdo para redes sociais</span></div>
       </div>
 
-      <!-- === NOVA LINHA === -->
+      <!-- Nova linha -->
       <div class="vcard pg-v11" data-id="QZs1EZ-wL_A">
         <div class="yt-facade" style="background-image:url('https://i.ytimg.com/vi/QZs1EZ-wL_A/hqdefault.jpg')"></div>
         <div class="yt-play"></div>
@@ -285,7 +317,7 @@
       <p class="sobre-p">
         <b>Jotapê Jorge</b> é jornalista com quase 20 anos de experiência e editor de vídeo. 
         Narrativa editorial com técnica audiovisual. Cada corte tem intenção e cada vídeo tem 
-        uma história para contar. Disponível para projetos freelance.
+        uma história para contar (porque tudo tem uma história). Disponível para projetos freelance.
       </p>
       <div class="sobre-tags">
         <span class="tag">Premiere Pro</span>
@@ -297,9 +329,7 @@
     </div>
   </section>
 
-  <!-- Contato e Footer (mantidos) -->
-  <section id="contato">...</section>
-  <footer>...</footer>
+  <!-- CONTATO E FOOTER (adicione se precisar) -->
 
   <script>
     document.querySelectorAll('.vcard').forEach(card => {
@@ -307,7 +337,7 @@
         if (this.querySelector('iframe')) return;
         const id = this.dataset.id;
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
         iframe.allowFullscreen = true;
         this.innerHTML = '';
         this.appendChild(iframe);
