@@ -16,7 +16,7 @@
       --serif: 'Merriweather', Georgia, serif;
       --italic: 'Playfair Display', Georgia, serif;
       --cond: 'Barlow Condensed', sans-serif;
-      --nav-h: 104px; /* altura do nav fixo — ajuste se mudar o padding */
+      --nav-h: 104px;
     }
 
     html, body { overflow-x: hidden; }
@@ -34,176 +34,125 @@
       padding: 2rem 2.5rem;
       border-bottom: 1px solid #f0f0f0;
     }
-    .nav-name {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-    .nav-name img {
-      height: 80px;
-      width: auto;
-      display: block;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
+    .nav-name { text-decoration: none; display: flex; align-items: center; }
+    .nav-name img { height: 80px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
+      font-size: .75rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color .2s;
     }
     .nav-links a:hover { color: var(--navy); }
 
-    /* espaço para o nav fixo */
-    body > section:first-of-type,
-    #works {
-      padding-top: var(--nav-h);
-    }
-
-    /* ── PORTFOLIO GRID ── */
+    /* ── PORTFOLIO ── */
     #works { padding: var(--nav-h) 2.5rem 0; }
+
+    /*
+      Layout — 5 colunas, alturas por aspect-ratio:
+
+      linha 1 (hero):
+        [ v0 — 5col, 16:9 ]
+
+      linha 2 (horizontais + shorts):
+        [ v1 Henry Darger — 3col, 16:9 ] [ v4 Arranha-céu — 1col, 9:16 ] [ v5 Mishima — 1col, 9:16 ]
+
+      linha 3 (shorts + horizontal):
+        [ v6 Animes — 1col, 9:16 ] [ v10 Short — 1col, 9:16 ] [ v2 Free Willy — 3col, 16:9 ]
+
+      linha 4 (só horizontais):
+        [ v7 Editfest — 2col, 16:9 ] [ v3 Kafka — 3col, 16:9 ]
+
+      FECHADOS (descomente para reativar):
+        v8 Tropas Estelares, v9 Short
+    */
 
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      /* Linha 1 = hero (altura automática, segue aspect-ratio 16:9)
-         Linhas 2+ = altura fixa do grid normal */
-      grid-template-rows: auto repeat(8, calc((100vw - 9rem) * 0.169));
       gap: 1rem;
     }
 
-    /*
-    ┌─────────────────────────────────────────────┐
-    │  HERO — linha 1–2, todas as 5 colunas       │
-    └─────────────────────────────────────────────┘
-    */
-    .pg-v0 {
-      grid-column: 1 / 6;
-      grid-row: 1;                 /* ocupa 1 linha, mas define sua própria altura */
-      aspect-ratio: 16 / 9;       /* proporção real de vídeo */
-      height: auto;
-    }
+    /* Hero */
+    .pg-v0 { grid-column: 1 / 6; aspect-ratio: 16 / 9; }
+
+    /* Linha 2 */
+    .pg-v1 { grid-column: 1 / 4; aspect-ratio: 16 / 9; }
+    .pg-v4 { grid-column: 4 / 5; aspect-ratio: 9 / 16; }
+    .pg-v5 { grid-column: 5 / 6; aspect-ratio: 9 / 16; }
+
+    /* Linha 3 */
+    .pg-v6  { grid-column: 1 / 2; aspect-ratio: 9 / 16; }
+    .pg-v10 { grid-column: 2 / 3; aspect-ratio: 9 / 16; }
+    .pg-v2  { grid-column: 3 / 6; aspect-ratio: 16 / 9; }
+
+    /* Linha 4 */
+    .pg-v7 { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+    .pg-v3 { grid-column: 3 / 6; aspect-ratio: 16 / 9; }
 
     /*
-    ┌───────┬───────┬───┬───┐
-    │  v1   │  v2   │v3 │v4 │   linhas 3–4
-    │(2col) │(2col) │   │   │
-    └───────┴───────┴───┴───┘
-    */
-    .pg-v1 { grid-column: 1 / 3; grid-row: 2 / 4; }
-    .pg-v2 { grid-column: 3 / 5; grid-row: 2 / 4; }
-    .pg-v3 { grid-column: 5 / 6; grid-row: 2 / 3; }
-    .pg-v4 { grid-column: 5 / 6; grid-row: 3 / 4; }
+      FECHADOS — descomente CSS + objetos no array VIDEOS para reativar:
 
-    /*
-    ┌───┬───┬───────────┐
-    │v5 │v6 │    v7     │   linhas 4–5
-    │   │   │  (3col)   │
-    └───┴───┴───────────┘
+    .pg-v8 { grid-column: ???; aspect-ratio: 16 / 9; }
+    .pg-v9 { grid-column: ???; aspect-ratio: 9 / 16; }
     */
-    .pg-v5 { grid-column: 1 / 2; grid-row: 4 / 6; }
-    .pg-v6 { grid-column: 2 / 3; grid-row: 4 / 6; }
-    .pg-v7 { grid-column: 3 / 6; grid-row: 4 / 6; }
 
-    /*
-    ┌───────────┬───┬───┬───┐
-    │    v8     │v9 │v10│v11│   linhas 6–7
-    │  (3col)   │   │   │   │
-    └───────────┴───┴───┴───┘
-    */
-    /* Última linha: v8 grande (3col) + v9, v10, v11 verticais (1col cada) */
-    .pg-v8  { grid-column: 1 / 4; grid-row: 6 / 8; }  /* grande 3col×2lin */
-    .pg-v9  { grid-column: 4 / 5; grid-row: 6 / 8; }  /* vertical 1col×2lin */
-    .pg-v10 { grid-column: 5 / 6; grid-row: 6 / 8; }  /* vertical 1col×2lin */
-    /* pg-v11 não usado neste layout */
-    .pg-v11 { display: none; }                          /* só 2 vídeos na col direita */
+    .pg-v11 { display: none; }
 
     /* ── VIDEO CARDS ── */
     .vcard {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      background: #f0f0f0;
+      position: relative; overflow: hidden;
+      cursor: pointer; background: #f0f0f0;
+      width: 100%;
     }
     .yt-facade {
-      position: absolute;
-      inset: -4%;
-      background-size: cover;
-      background-position: center;
+      position: absolute; inset: -4%;
+      background-size: cover; background-position: center;
       transition: transform .4s ease;
     }
     .vcard:hover .yt-facade { transform: scale(1.04); }
     .vcard iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: none;
     }
-
     .yt-play {
-      position: absolute;
-      top: 50%; left: 50%;
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: 48px; height: 48px;
-      background: rgba(0,0,0,.65);
-      border-radius: 50%;
+      background: rgba(0,0,0,.65); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      transition: background .2s;
-      pointer-events: none;
+      transition: background .2s; pointer-events: none;
     }
     .vcard:hover .yt-play { background: rgba(0,0,0,.85); }
     .yt-play::after {
-      content: '';
-      border-style: solid;
+      content: ''; border-style: solid;
       border-width: 9px 0 9px 16px;
       border-color: transparent transparent transparent #fff;
       margin-left: 3px;
     }
-    /* Botão maior nos destaques grandes */
-    .pg-v0 .yt-play,
-    .pg-v7 .yt-play,
-    .pg-v8 .yt-play {
-      width: 64px; height: 64px;
-    }
-    .pg-v0 .yt-play::after,
-    .pg-v7 .yt-play::after,
-    .pg-v8 .yt-play::after {
-      border-width: 13px 0 13px 22px;
-    }
+    .pg-v0 .yt-play, .pg-v1 .yt-play,
+    .pg-v2 .yt-play, .pg-v3 .yt-play,
+    .pg-v7 .yt-play { width: 64px; height: 64px; }
+    .pg-v0 .yt-play::after, .pg-v1 .yt-play::after,
+    .pg-v2 .yt-play::after, .pg-v3 .yt-play::after,
+    .pg-v7 .yt-play::after { border-width: 13px 0 13px 22px; }
 
     .card-overlay {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 55%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1rem;
-      pointer-events: none;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1rem; pointer-events: none;
     }
     .vcard-title {
-      font-family: var(--serif);
-      font-size: .8rem;
-      font-weight: 300;
-      color: #fff;
-      line-height: 1.4;
+      font-family: var(--serif); font-size: .8rem;
+      font-weight: 300; color: #fff; line-height: 1.4;
     }
-    .pg-v0 .vcard-title,
-    .pg-v7 .vcard-title,
-    .pg-v8 .vcard-title {
-      font-size: 1rem;
-    }
+    .pg-v0 .vcard-title, .pg-v1 .vcard-title,
+    .pg-v2 .vcard-title, .pg-v3 .vcard-title,
+    .pg-v7 .vcard-title { font-size: 1rem; }
 
     /* ── SOBRE ── */
     #sobre {
-      padding: 0 2.5rem 5rem;
+      padding: 4rem 2.5rem 5rem;
       display: grid;
       grid-template-columns: 1fr 160px 2fr;
       gap: 3rem;
@@ -211,206 +160,96 @@
       align-items: start;
     }
     .sobre-label {
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding-top: .2rem;
+      font-size: .7rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--muted); padding-top: .2rem;
     }
-    .sobre-foto {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-    .sobre-body {
-      display: block;
-    }
+    .sobre-foto { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; }
+    .sobre-body { display: block; }
     .sobre-hed {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-      font-weight: 400;
-      line-height: 1.3;
-      margin-bottom: 1.5rem;
-      color: #111;
+      font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 400; line-height: 1.3; margin-bottom: 1.5rem; color: #111;
     }
     .sobre-hed .dot { color: var(--blue); }
-    .sobre-hed em {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-    }
-    .sobre-p {
-      font-size: .9rem;
-      color: #777;
-      line-height: 1.9;
-      max-width: 520px;
-      margin-bottom: 1.8rem;
-    }
-    .sobre-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-    }
+    .sobre-hed em { font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
+    .sobre-p { font-size: .9rem; color: #777; line-height: 1.9; max-width: 520px; margin-bottom: 1.8rem; }
+    .sobre-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
     .tag {
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid #e0e0e0;
-      padding: .25rem .7rem;
+      font-size: .65rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      border: 1px solid #e0e0e0; padding: .25rem .7rem;
     }
 
     /* ── CONTATO ── */
-    #contato {
-      background: var(--navy);
-      padding: 6rem 2.5rem;
-    }
-    .contato-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
+    #contato { background: var(--navy); padding: 6rem 2.5rem; }
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
     .contato-hed {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 3rem;
+      font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400; color: #fff; line-height: 1.2; margin-bottom: 3rem;
     }
-    .contato-hed em {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      color: #fff;
-    }
+    .contato-hed em { font-family: 'Playfair Display', Georgia, serif; font-style: italic; color: #fff; }
     .contato-list { display: flex; flex-direction: column; }
     .cl {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      text-decoration: none;
-      transition: border-color .2s;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
+      text-decoration: none; transition: border-color .2s;
     }
     .cl:hover { border-bottom-color: rgba(255,255,255,.3); }
-    .cl-label {
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.35);
-    }
-    .cl-val {
-      font-size: .9rem;
-      color: rgba(255,255,255,.7);
-    }
+    .cl-label { font-size: .65rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .cl-val { font-size: .9rem; color: rgba(255,255,255,.7); }
     .cl-arrow { color: rgba(255,255,255,.25); }
 
     /* ── FOOTER ── */
     footer {
-      background: #111e2b;
-      padding: 1.8rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: #111e2b; padding: 1.8rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .footer-name {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      text-decoration: none;
-    }
-    .footer-name .fn-serif {
-      font-family: var(--serif);
-      font-size: .95rem;
-      font-weight: 400;
-      color: rgba(255,255,255,.3);
-    }
-    .footer-name .fn-sans {
-      font-family: var(--cond);
-      font-size: .95rem;
-      font-weight: 400;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.3);
-    }
-    .footer-copy {
-      font-size: .62rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      color: rgba(255,255,255,.18);
-    }
+    .footer-name { display: flex; align-items: center; gap: .4rem; text-decoration: none; }
+    .footer-name .fn-serif { font-family: var(--serif); font-size: .95rem; font-weight: 400; color: rgba(255,255,255,.3); }
+    .footer-name .fn-sans { font-family: var(--cond); font-size: .95rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .footer-copy { font-size: .62rem; font-weight: 600; letter-spacing: .1em; color: rgba(255,255,255,.18); }
 
     .lang-btn {
-      font-family: var(--cond);
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: none;
-      border: 1px solid #ddd;
-      padding: .3rem .7rem;
-      cursor: pointer;
-      transition: color .2s, border-color .2s;
+      font-family: var(--cond); font-size: .75rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+      background: none; border: 1px solid #ddd; padding: .3rem .7rem;
+      cursor: pointer; transition: color .2s, border-color .2s;
     }
     .lang-btn:hover { color: var(--navy); border-color: var(--navy); }
 
-    /* ── RESPONSIVE ── */
+    /* ── RESPONSIVE 900px ── */
     @media (max-width: 900px) {
       :root { --nav-h: 80px; }
-      .portfolio-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto repeat(8, calc((100vw - 5rem) * 0.28));
-      }
-      .pg-v0  { grid-column: 1 / 4; grid-row: 1; aspect-ratio: 16/9; height: auto; }
-      .pg-v1  { grid-column: 1 / 3; grid-row: 2 / 4; }
-      .pg-v2  { grid-column: 3 / 4; grid-row: 2 / 4; }
-      .pg-v3  { grid-column: 1 / 2; grid-row: 4 / 5; }
-      .pg-v4  { grid-column: 2 / 3; grid-row: 4 / 5; }
-      .pg-v5  { grid-column: 3 / 4; grid-row: 4 / 6; }
-      .pg-v6  { grid-column: 1 / 2; grid-row: 5 / 7; }
-      .pg-v7  { grid-column: 2 / 4; grid-row: 5 / 7; }
-      .pg-v8  { grid-column: 1 / 3; grid-row: 7 / 9; }
-      .pg-v9  { grid-column: 3 / 4; grid-row: 7 / 9; }
-      .pg-v10 { grid-column: 1 / 2; grid-row: 9 / 10; }
-      .pg-v11 { grid-column: 2 / 3; grid-row: 9 / 10; }
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+      .pg-v0  { grid-column: 1 / 4; }
+      .pg-v1  { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+      .pg-v4  { grid-column: 3 / 4; aspect-ratio: 9 / 16; }
+      .pg-v5  { grid-column: 3 / 4; aspect-ratio: 9 / 16; }
+      .pg-v6  { grid-column: 1 / 2; aspect-ratio: 9 / 16; }
+      .pg-v10 { grid-column: 2 / 3; aspect-ratio: 9 / 16; }
+      .pg-v2  { grid-column: 1 / 4; aspect-ratio: 16 / 9; }
+      .pg-v7  { grid-column: 1 / 2; aspect-ratio: 16 / 9; }
+      .pg-v3  { grid-column: 2 / 4; aspect-ratio: 16 / 9; }
     }
 
+    /* ── RESPONSIVE 600px ── */
     @media (max-width: 600px) {
       :root { --nav-h: 72px; }
-      nav {
-        padding: 1.2rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
+      nav { padding: 1.2rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
       .nav-name img { height: 48px; }
       .nav-links { gap: 1.2rem; }
       .nav-links a { font-size: .68rem; }
       #works { padding: var(--nav-h) 1.2rem 2rem; }
-      .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto repeat(10, calc((100vw - 2.4rem - 1rem) * 0.56 / 2));
-        gap: .6rem;
-      }
-      .pg-v0  { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/9; height: auto; }
-      .pg-v1  { grid-column: 1 / 3; grid-row: 2 / 3; }
-      .pg-v2  { grid-column: 1 / 2; grid-row: 3 / 5; }
-      .pg-v3  { grid-column: 2 / 3; grid-row: 3 / 4; }
-      .pg-v4  { grid-column: 2 / 3; grid-row: 4 / 5; }
-      .pg-v5  { grid-column: 1 / 2; grid-row: 5 / 7; }
-      .pg-v6  { grid-column: 2 / 3; grid-row: 5 / 7; }
-      .pg-v7  { grid-column: 1 / 3; grid-row: 7 / 8; }
-      .pg-v8  { grid-column: 1 / 3; grid-row: 8 / 9; }  /* largura total */
-      .pg-v9  { grid-column: 1 / 2; grid-row: 9 / 11; }  /* vertical esquerda */
-      .pg-v10 { grid-column: 2 / 3; grid-row: 9 / 11; }  /* vertical direita */
-      #sobre { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 1.2rem; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+      .pg-v0  { grid-column: 1 / 3; }
+      .pg-v1  { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+      .pg-v4  { grid-column: 1 / 2; aspect-ratio: 9 / 16; }
+      .pg-v5  { grid-column: 2 / 3; aspect-ratio: 9 / 16; }
+      .pg-v6  { grid-column: 1 / 2; aspect-ratio: 9 / 16; }
+      .pg-v10 { grid-column: 2 / 3; aspect-ratio: 9 / 16; }
+      .pg-v2  { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+      .pg-v7  { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+      .pg-v3  { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+      #sobre  { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 1.2rem; }
       .sobre-foto { width: 90px; height: 90px; }
       #contato { padding: 4rem 1.2rem; }
       .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -420,7 +259,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="#" class="nav-name">
       <img src="cabeçalho_site.png" alt="Jotapê Jorge" />
@@ -433,14 +271,10 @@
     </ul>
   </nav>
 
-  <!-- PORTFOLIO -->
   <section id="works">
-    <div class="portfolio-grid" id="portfolio-grid">
-      <!-- Os cards são gerados pelo JS abaixo -->
-    </div>
+    <div class="portfolio-grid" id="portfolio-grid"></div>
   </section>
 
-  <!-- SOBRE -->
   <section id="sobre">
     <p class="sobre-label">Sobre</p>
     <img src="jornalista_azul.png" alt="Foto de perfil" class="sobre-foto" />
@@ -461,7 +295,6 @@
     </div>
   </section>
 
-  <!-- CONTATO -->
   <section id="contato">
     <div class="contato-grid">
       <div>
@@ -487,7 +320,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <a href="#" class="footer-name">
       <span class="fn-serif">Jotapê</span>
@@ -497,126 +329,81 @@
   </footer>
 
   <script>
-    /* =============================================================
-       VÍDEOS — edite aqui para adicionar, remover ou reordenar.
-       
-       Cada objeto tem:
-         id_pt   → ID do vídeo em português (YouTube)
-         id_en   → ID do vídeo em inglês (deixe igual ao pt_id se não houver versão EN)
-         thumb   → URL da thumbnail (deixe null para usar a do YouTube automaticamente)
-         title_pt → Título em português
-         title_en → Título em inglês
-         slot     → Classe CSS do card (pg-v0, pg-v1 … pg-v11)
-                    pg-v0 = hero (largura total)
-                    Não mude os slots sem ajustar o CSS acima.
-    ============================================================= */
+    /*
+      SLOTS → VÍDEOS:
+      pg-v0  → Apresentação      (hero, 16:9)
+      pg-v1  → Henry Darger      (horizontal, 3col, 16:9)
+      pg-v4  → Arranha-céu SP    (short, 1col, 9:16)
+      pg-v5  → Mishima           (short, 1col, 9:16)
+      pg-v6  → Origem dos animes (short, 1col, 9:16)
+      pg-v10 → Short             (short, 1col, 9:16)
+      pg-v2  → Free Willy        (horizontal, 3col, 16:9)
+      pg-v7  → Editfest 2026     (horizontal, 2col, 16:9)
+      pg-v3  → Kafka             (horizontal, 3col, 16:9)
+
+      FECHADOS — descomente para reativar (ajuste grid-column no CSS também):
+      pg-v8  → Tropas Estelares  (horizontal, 16:9)
+      pg-v9  → Short             (short, 9:16)
+    */
     const VIDEOS = [
       {
-        slot:     'pg-v0',
-        id_pt:    'R_FvvL7IE-Y',
-        id_en:    'aSyj1bPddP4',
-        thumb_pt: 'thumbnail.jpg',
-        thumb_en: 'thumbnailEN.jpg',
-        title_pt: 'Apresentação',
-        title_en: 'Introduction',
+        slot: 'pg-v0', id_pt: 'R_FvvL7IE-Y', id_en: 'aSyj1bPddP4',
+        thumb_pt: 'thumbnail.jpg', thumb_en: 'thumbnailEN.jpg',
+        title_pt: 'Apresentação', title_en: 'Introduction',
       },
       {
-        slot:     'pg-v1',
-        id_pt:    '5L2Vk_kP_zo',
-        id_en:    '5L2Vk_kP_zo',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'O estranho mundo de Henry Darger',
-        title_en: 'The strange world of Henry Darger',
-    
+        slot: 'pg-v1', id_pt: '5L2Vk_kP_zo', id_en: '5L2Vk_kP_zo',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'O estranho mundo de Henry Darger', title_en: 'The strange world of Henry Darger',
       },
       {
-        slot:     'pg-v2',
-        id_pt:    'TyuT89hlfhY',
-        id_en:    'TyuT89hlfhY',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: "A verdadeira história de 'Free Willy'",
-        title_en: "The true story of 'Free Willy'",
+        slot: 'pg-v4', id_pt: '0zjmjJIz-ZY', id_en: '0zjmjJIz-ZY',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'O arranha-céu que SP "quase" teve', title_en: 'The skyscraper São Paulo "almost" had',
       },
       {
-        slot:     'pg-v3',
-        id_pt:    'Vls3VO-AHks',
-        id_en:    'Vls3VO-AHks',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'Kafka',
-        title_en: 'Kafka: a star on TikTok',
+        slot: 'pg-v5', id_pt: 'QKpAV-XppEI', id_en: 'QKpAV-XppEI',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'Yukio Mishima', title_en: 'Yukio Mishima',
       },
       {
-        slot:     'pg-v4',
-        id_pt:    '0zjmjJIz-ZY',
-        id_en:    '0zjmjJIz-ZY',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'O arranha-céu que SP "quase" teve',
-        title_en: 'The skyscraper São Paulo "almost" had',
+        slot: 'pg-v6', id_pt: 'Bn76p5Z7Ia4', id_en: 'Bn76p5Z7Ia4',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'A origem bizarra dos animes', title_en: 'The bizarre origin of anime',
       },
       {
-        slot:     'pg-v5',
-        id_pt:    'QKpAV-XppEI',
-        id_en:    'QKpAV-XppEI',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'Yukio Mishima',
-        title_en: 'Yukio Mishima',
+        slot: 'pg-v10', id_pt: 'de5_q5YGiqs', id_en: 'de5_q5YGiqs',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'YouTube Short', title_en: 'YouTube Short',
       },
       {
-        slot:     'pg-v6',
-       id_pt:    'Bn76p5Z7Ia4',
-        id_en:    'Bn76p5Z7Ia4',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'A origem bizarra dos animes',
-        title_en: 'The bizarre origin of anime',
+        slot: 'pg-v2', id_pt: 'TyuT89hlfhY', id_en: 'TyuT89hlfhY',
+        thumb_pt: null, thumb_en: null,
+        title_pt: "A verdadeira história de 'Free Willy'", title_en: "The true story of 'Free Willy'",
       },
       {
-        slot:     'pg-v7',
-        id_pt:    'QZs1EZ-wL_A',
-        id_en:    'QZs1EZ-wL_A',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'Editfest 2026 | Untime',
-        title_en: 'Editfest 2026 | Untime',
-          },
-      {
-        slot:     'pg-v8',
-        id_pt:    'yWjlX9FIgDU',
-        id_en:    'yWjlX9FIgDU',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'O Fascismo em Tropas Estelares',
-        title_en: 'The fascism of Starship Troopers',
+        slot: 'pg-v7', id_pt: 'QZs1EZ-wL_A', id_en: 'QZs1EZ-wL_A',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'Editfest 2026 | Untime', title_en: 'Editfest 2026 | Untime',
       },
       {
-        slot:     'pg-v9',
-        id_pt:    'YiOKFGqHNYw',
-        id_en:    'YiOKFGqHNYw',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'YouTube Short',
-        title_en: 'YouTube Short',
+        slot: 'pg-v3', id_pt: 'Vls3VO-AHks', id_en: 'Vls3VO-AHks',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'Kafka', title_en: 'Kafka: a star on TikTok',
+      },
+      /* FECHADOS — descomente para reativar
+      {
+        slot: 'pg-v8', id_pt: 'yWjlX9FIgDU', id_en: 'yWjlX9FIgDU',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'O Fascismo em Tropas Estelares', title_en: 'The fascism of Starship Troopers',
       },
       {
-        slot:     'pg-v10',
-        id_pt:    'de5_q5YGiqs',
-        id_en:    'de5_q5YGiqs',
-        thumb_pt: null,
-        thumb_en: null,
-        title_pt: 'YouTube Short',
-        title_en: 'YouTube Short',
+        slot: 'pg-v9', id_pt: 'YiOKFGqHNYw', id_en: 'YiOKFGqHNYw',
+        thumb_pt: null, thumb_en: null,
+        title_pt: 'YouTube Short', title_en: 'YouTube Short',
       },
-
+      */
     ];
-
-    /* =============================================================
-       Não precisa editar abaixo desta linha para trocar vídeos.
-    ============================================================= */
 
     let currentLang = 'pt';
 
@@ -630,22 +417,17 @@
     function buildGrid(lang) {
       const grid = document.getElementById('portfolio-grid');
       grid.innerHTML = '';
-
       VIDEOS.forEach(video => {
         const id    = lang === 'en' ? video.id_en : video.id_pt;
         const title = lang === 'en' ? video.title_en : video.title_pt;
         const thumb = thumbURL(video, lang);
-
-        const card = document.createElement('div');
+        const card  = document.createElement('div');
         card.className = `vcard ${video.slot}`;
         card.dataset.id = id;
         card.innerHTML = `
           <div class="yt-facade" style="background-image:url('${thumb}')"></div>
           <div class="yt-play"></div>
-          <div class="card-overlay">
-            <span class="vcard-title">${title}</span>
-          </div>`;
-
+          <div class="card-overlay"><span class="vcard-title">${title}</span></div>`;
         card.addEventListener('click', function () {
           const iframe = document.createElement('iframe');
           iframe.src = `https://www.youtube.com/embed/${this.dataset.id}?autoplay=1`;
@@ -654,12 +436,10 @@
           this.innerHTML = '';
           this.appendChild(iframe);
         });
-
         grid.appendChild(card);
       });
     }
 
-    // Tradução das demais seções
     const translations = {
       pt: {
         nav: ['Portfólio', 'Sobre', 'Contato'],
@@ -698,7 +478,6 @@
       applyTranslations(currentLang);
     }
 
-    // Init
     buildGrid(currentLang);
   </script>
 </body>
